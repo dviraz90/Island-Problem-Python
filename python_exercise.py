@@ -1,10 +1,7 @@
 import argparse
 
 
-
-
 def check_numbers(grid):
-
     size = len(grid[0])
     for l in grid:
         if len(l) != size:
@@ -17,13 +14,10 @@ def check_numbers(grid):
                 return False
     return True
 
-
 check = set()
-
 
 def right(i, j, grid):
     if j in range(len(grid[0])-1):
-
         if grid[i][j+1] == grid[i][j]:
             if (i, j) not in check:
                 check.add((i, j))
@@ -32,9 +26,7 @@ def right(i, j, grid):
             top(i, j, grid)
             left(i, j, grid)
             grid[i][j] = 0
-
             return right(i, j+1, grid)
-
     return
 
 
@@ -46,7 +38,6 @@ def left(i, j, grid):
             check.add((i, j-1))
             grid[i][j] = 0
             return left(i, j-1, grid)
-
     return 
 
 
@@ -60,7 +51,6 @@ def top(i, j, grid):
             right(i, j+1, grid)
             grid[i][j] = 0
             return top(i-1, j, grid)
-
     return 0
 
 
@@ -75,25 +65,20 @@ def bottom(i, j, grid):
             top(i, j, grid)
             grid[i][j] = 0
             return bottom(i+1, j, grid)
-
     return 0
 
 
 def findCountries(grid):
     if check_numbers(grid) == False:
         return "please enter A valid LIST OF LIST N X M"
-
     countries = 0
     val = 0
     for i in range(len(grid)):
         for j in range(len(grid[0])):
-            if (i, j) not in check and grid[i][j] != 0:
-               
+            if (i, j) not in check and grid[i][j] != 0:            
                 right(i, j+1, grid)
-                bottom(i, j, grid)
-               
+                bottom(i, j, grid)           
                 countries += 1
-
     return countries
 
 
@@ -111,13 +96,8 @@ def main(args):
             if row[i][j] == ' ' or row[i][j] == "":
                continue
             row[i][j] = int(row[i][j])
-        
-    print(row)
     print(findCountries(row))
 
-               
-
-   
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="countries in a list of a list")
     parser.add_argument("--list", nargs="+", type=list)

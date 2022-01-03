@@ -1,4 +1,4 @@
-# ** Python exercise **
+# ** Island Problem **
 
 ## About the project
 
